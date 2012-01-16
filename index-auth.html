@@ -12,12 +12,28 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <!--<link href="../bootstrap.css" rel="stylesheet">
+    <!--<link href="../bootstrap.css" rel="stylesheet">-->
     <style type="text/css">
-      body {
-        padding-top: 60px;
+      #search {
+        font-size: 30px;
+        height: 30px;
+        line-height: 36px;
       }
-    </style>-->
+
+      #logo {
+        font-size: 55px;
+        height: 80px;
+        line-height: 80px;
+      }
+
+      .row {
+        margin-top: 20px;
+      }
+
+      .repo-logo {
+        height: 100px;
+      }
+    </style>
 
 		<link rel="stylesheet/less" href="bootstrap/lib/bootstrap.less">
 		<script src="js/less-1.1.6.min.js"></script>
@@ -29,52 +45,28 @@
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
   </head>
 
-  <body style="padding-top: 80px;">
+  <body style="padding-top: 60px;">
 
     <div class="topbar">
       <div class="topbar-inner">
-        <div class="container-fluid">
+        <div class="container">
           <a class="brand" href="#">Blobs from TryCodex</a>
-          <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
           <p class="pull-right">Logged in as username</p>
         </div>
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="sidebar">
-        <div class="well">
-          <h5>Sidebar</h5>
-          <ul>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-          </ul>
-          <h5>Sidebar</h5>
-          <ul>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-          </ul>
-          <h5>Sidebar</h5>
-          <ul>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-          </ul>
-        </div>
-      </div>
+    <div class="container">
       <div class="content">
         <div class="row">
-          <div class="span16">
+          <div class="clearfix offset5 span6">
+            <div id="logo">Codex Logo</div>
           </div>
+          <div class="clearfix offset4 span8">
+            <input class="span8" id="search" name="search" type="text" placeholder="Autocomplete">
+          </div>
+        </div>
+        <div class="row" id="repo-logos">
         </div>
         <footer>
           <p>&copy; Company 2011</p>
@@ -91,11 +83,11 @@
 			user.getAuthUser();
 			user2.getUser({user: 'wearefractal'});
 
-      window.repos = new Repos;
+      //window.repos = new Repos;
       window.repos2 = new Repos;
       window.repos3 = new Repos;
 
-      repos.getAuthUserRepos();
+      //repos.getAuthUserRepos();
       repos2.getUserRepos({user: 'contra'});
       repos3.getOrgRepos({org: 'wearefractal'});
 
@@ -133,22 +125,22 @@
         }
       });*/
 
-      var commitsCallback = function(){
+      /*var commitsCallback = function(){
         commits.getRepoCommits({
-          apiUrl: repos4.get('repos').data.url,
+          apiUrl: repos4.get('repos').url,
           callback: treeCallback
         });
       };
 
       var treeCallback = function(){
         tree.getTree({
-          apiUrl: commits.get('commits').data[0].commit.tree.url,
+          apiUrl: commits.get('commits')[0].commit.tree.url,
           callback: blobCallback
         });
       };
 
       var blobCallback = function(){
-        $.each(tree.get('tree').data.tree, function(value, index){
+        $.each(tree.get('tree').tree, function(value, index){
           if(value.type == 'blob') {
             var tempBlob = new Blob;
             tempBlob.getBlob({
@@ -168,6 +160,19 @@
         user: 'phated',
         repo: 'trycodex',
         callback: commitsCallback
+      });*/
+
+      var reposCallback = function(){
+        $.each(repos.get('repos'), function(value, index){
+          var url = [value.html_url,'/raw/master/icon.png'].join('');
+          $('#repo-logos').append('<div class="span4 repo-logo" style="background-image:url(' + url + ')">' + value.name +'</div>');
+        });
+      };
+
+      window.repos = new Repos;
+
+      repos.getAuthUserRepos({
+        callback: reposCallback
       });
 		</script>
   </body>

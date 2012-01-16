@@ -39,7 +39,7 @@ var User = $.Model.extend({
     , type: 'jsonp'
     , error: function(err) { console.log(err); }
     , success: function(resp) {
-        params.model.set({user: resp});
+        params.model.set({user: resp.data});
         if(params.callback) params.callback();
       }
     });
@@ -110,7 +110,7 @@ var Repos = $.Model.extend({
     , type: 'jsonp'
     , error: function(err) { console.log(err); }
     , success: function(resp) {
-        params.model.set({repos: resp});
+        params.model.set({repos: resp.data});
         if(params.callback) params.callback();
       }
     });
@@ -155,7 +155,7 @@ var Commits = $.Model.extend({
     , type: 'jsonp'
     , error: function(err) { console.log(err); }
     , success: function(resp) {
-        params.model.set({commits: resp});
+        params.model.set({commits: resp.data});
         if(params.callback) params.callback();
       }
     });
@@ -200,7 +200,7 @@ var Tree = $.Model.extend({
     , type: 'jsonp'
     , error: function(err) { console.log(err); }
     , success: function(resp) {
-        params.model.set({tree: resp});
+        params.model.set({tree: resp.data});
         if(params.callback) params.callback();
       }
     });
