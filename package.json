@@ -1,0 +1,16 @@
+{
+  "name":"github-v3-api-js",
+  "description":"Experimentation with github api (v3) in javascript",
+	"version":"0.0.1",
+  "author":"Phated <blaine@iceddev.com>",
+  "dependencies": {
+    "ender":">= 0.8.3",
+    "connect":">= 1.8.5",
+		"connect-auth":">= 0.4.1",
+		"oauth":">= 0.9.5",
+		"openid":">= 0.3.1"
+  },
+  "engines":{
+  	"node":">= 0.4.0"
+  }
+}
